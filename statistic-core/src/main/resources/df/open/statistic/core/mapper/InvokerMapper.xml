@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="df.open.statistic.core.dao.InvokerMapper">
+
+    <resultMap id="InvokerDbMap" type="df.open.statistic.pojo.InvokerDB">
+         <result column="id" property="id" />
+         <!--<result column="type" property="type" typeHandler="GenericEnumHandler"/>-->
+         <result column="project" property="project" />
+         <result column="class_name" property="className" />
+         <result column="method_name" property="methodName" />
+         <result column="parent_class_name" property="parentClassName" />
+         <result column="parent_method_name" property="parentMethodName" />
+         <result column="cost" property="cost" />
+         <result column="count" property="count" />
+         <!--<result column="result" property="result" typeHandler="GenericEnumHandler" />-->
+         <result column="invoke_time" property="invokeTime" />
+         <result column="create_time" property="createTime" />
+
+    </resultMap>
+    <sql id="columns">
+       ID as id,
+       type as type,
+       project as project,
+       class_name as className,
+       method_name as methodName,
+       parent_class_name as parentClassName,
+       parent_method_name as parentMethodName,
+       cost as cost,
+       count as count,
+       result as result,
+       invoke_time as invokeTime,
+       create_time as createTime
+    </sql>
+
+    <select id="select" parameterType="df.open.statistic.pojo.InvokerDB" resultMap="InvokerDbMap">
+        select <include refid="columns" />
+        from s_invoker
+        <where>
+            project = #{project}
+            <if test="type != null and type != ''">
+                type = #{type}
+            </if>
+        </where>
+    </select>
+    <select id="listByProjectAndType" resultType="df.open.statistic.pojo.InvokerDB">
+        select <include refid="columns" />
+        from s_invoker
+        <where>
+            project = #{project}
+        </where>
+
+    </select>
+    <!-- #{status,typeHandler=com.xxx.xxx.persistence.mapper.cc.handler.GenericEnumCodeHandler}-->
+    <insert id="insertBatch" >
+        <!--insert into-->
+        <!--s_invoker(id,type,project,class_name,method_name,parent_class_name,parent_method_name,cost,count,result, invoke_time,create_time)-->
+        <!--VALUES-->
+        <!--<foreach collection="list" item="obj" index="index" separator=",">-->
+            <!--(-->
+            <!--#{obj.id},-->
+            <!--#{obj.type, typeHandler=GenericEnumHandler},-->
+            <!--#{obj.project},-->
+            <!--#{obj.className,jdbcType=VARCHAR},-->
+            <!--#{obj.methodName,jdbcType=VARCHAR},-->
+            <!--#{obj.parentClassName,jdbcType=VARCHAR},-->
+            <!--#{obj.parentMethodName,jdbcType=VARCHAR},-->
+            <!--#{obj.cost,jdbcType=NUMERIC},-->
+            <!--#{obj.count,jdbcType=INTEGER},-->
+            <!--#{obj.result,typeHandler=GenericEnumHandler},-->
+            <!--#{obj.invokeTime},-->
+            <!--#{obj.createTime}-->
+            <!--)-->
+        <!--</foreach>-->
+    </insert>
+
+</mapper>
+

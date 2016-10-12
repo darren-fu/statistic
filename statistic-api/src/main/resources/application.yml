@@ -1,0 +1,34 @@
+# db settings
+
+#spring:
+#  profiles: dev
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/vuedemo
+#    username: root
+#    password: dbpass
+#    driver-class: com.mysql.jdbc.Driver
+#
+#
+## Server settings (ServerProperties)
+server:
+  port: 9000
+  #address: 172.19.1.25
+  sessionTimeout: 30
+  contextPath: /
+
+  # Tomcat specifics
+  tomcat:
+    accessLogEnabled: false
+    protocolHeader: x-forwarded-proto
+    remoteIpHeader: x-forwarded-for
+    basedir:
+    backgroundProcessorDelay: 30 # secs
+
+
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:9999/eureka/
+#    healthcheck:
+#      enabled: true
+#    registryFetchIntervalSeconds: 30
