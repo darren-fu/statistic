@@ -10,7 +10,7 @@
 .idea/
 target/
 *.iml
-
+logs/
 node_modules/
 dist/
 
